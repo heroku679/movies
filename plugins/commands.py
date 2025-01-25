@@ -167,7 +167,25 @@ async def start(client:Client, message):
         await db.add_user(message.from_user.id, message.from_user.first_name)
         await client.send_message(LOG_CHANNEL, script.NEW_USER_TXT.format(temp.B_LINK, message.from_user.id, message.from_user.mention))
         try: 
+            def start(message):
+    try:
+        # Ensure there is at least one argument after the command
+        if len(message.command) > 1:
             refData = message.command[1]
+        else:
+            refData = None  # Handle the missing argument appropriately
+            # You can log a warning or send a message back to the user
+            print("Warning: No argument provided for the command.")
+    except Exception as e:
+        # Log or handle unexpected errors
+        print(f"An error occurred: {e}")
+        refData = None
+
+    # Rest of your function logic
+    if refData:
+        print(f"RefData provided: {refData}")
+    else:
+        print("No RefData to process.")
             if refData and refData.split("-", 1)[0] == "Jisshu":
                 Fullref = refData.split("-", 1)
                 refUserId = int(Fullref[1])
